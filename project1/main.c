@@ -207,7 +207,7 @@ void parseLine (Shell *sh) {
 	State state = strchr(sh->line,'&')? bg: fg;
 	pid_t cpid;
 	if (numCmds == 1) {
-		Token *cmdtok = TokenInit()
+		Token *cmdtok = TokenInit(TokenNext(tok),"&");
 		Command cmd;
 		CommandConst(&cmd, TokenNext(cmdtok));
 		cpid = forkexec(&cmd,NULL,0);
