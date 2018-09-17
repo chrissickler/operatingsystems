@@ -14,7 +14,7 @@ void VectorDeleteLite(Vector* vec);
 
 void VectorPush(Vector *vec, void* ptr);
 void* VectorPop(Vector *vec);
-void VectorRealloc(Vector* vec, in newSize);
+void VectorRealloc(Vector* vec, int newSize);
 
 void* VectorGet(Vector* vec, int index);
 int VectorFind(Vector* vec, void * thing );

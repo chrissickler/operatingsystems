@@ -4,15 +4,15 @@
 #include "token.h"
 #include "vector.h"
 
-Shell * shellInit() {
-    Shell sh = malloc(sizeof(Shell));
+Shell * shellInit(void) {
+    Shell *sh = malloc(sizeof(Shell));
 
     ShellConstr(sh);
 
     return sh;
 }
 
-void ShellConstr(Shell *sh) {
+void ShellConst(Shell *sh) {
     sh->prompt = malloc(PROMPT_SIZE * sizeof(char) + 1);
     sh->prompt[0] = '\0';
 

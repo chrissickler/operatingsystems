@@ -52,7 +52,7 @@ void VectorDelete(Vector* vec) {
     VectorDeleteLite(vec);
 }
 
-void VectorRealloc(Vector* this, in newSize) {
+void VectorRealloc(Vector* this, int newSize) {
     if(size <= this->length)
         return;
     void** oldArr = this->array;
