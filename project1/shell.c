@@ -67,7 +67,7 @@ Command *CommandInit(const char *line) {
 
 void CommandConst(Command *cmd, const char *line) {
     cmd->tok = TokenInit(line, " ");
-    cmd->inPipe = this->outPipe = NULL;
+    cmd->inPipe = cmd->outPipe = NULL;
 }
 
 void CommandDestr(Command *cmd) {
