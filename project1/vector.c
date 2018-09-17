@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include "shell.h"
+#include "token.h"
 #include "vector.h"
 
 struct vectorStr {

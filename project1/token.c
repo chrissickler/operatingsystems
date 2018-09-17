@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include "shell.h"
 #include "token.h"
 #include "vector.h"
 

@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "shell.h"
+#include "token.h"
+#include "vector.h"
 
 Shell * shellInit() {
     Shell sh = malloc(sizeof(Shell));
