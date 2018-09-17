@@ -3,6 +3,10 @@
 
 #include <stdlib.h>
 
+
+#include "token.h"
+#include "vector.h"
+
 #define PROMPT_SIZE 1000
 #define LINE_SIZE 2000
 
