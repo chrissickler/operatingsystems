@@ -17,7 +17,7 @@ Vector* VectorInit(int length) {
     vec->arr = malloc(sizeof(void*) * length);    // Allocate array space
     for(int i = 0; i < length; i++)
     {
-        vec->array[i] = 0x0;    // Null init
+        vec->arr[i] = 0x0;    // Null init
     }
     vec->del = free;
     return vec;
@@ -52,7 +52,7 @@ void VectorDelete(Vector* vec) {
     VectorDeleteLite(vec);
 }
 
-void VectorRealloc(Vector* this, int newSize) {
+void VectorRealloc(Vector* this, int size) {
     if(size <= this->length)
         return;
     void** oldArr = this->array;
