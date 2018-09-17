@@ -41,7 +41,7 @@ typedef struct {
     Process *active;
 } Shell;
 
-Shell * shellInit();
+Shell * shellInit(void);
 void ShellConst(Shell *sh);
 void ShellDestr(Shell *sh);
 

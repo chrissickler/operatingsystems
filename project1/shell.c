@@ -7,7 +7,7 @@
 Shell * shellInit(void) {
     Shell *sh = malloc(sizeof(Shell));
 
-    ShellConstr(sh);
+    ShellConst(sh);
 
     return sh;
 }
@@ -54,7 +54,7 @@ void ProcessDestr(Process *pr) {
     free(pr->command);
 }
 
-void ProcDelete(Process pr) {
+void ProcDelete(Process *pr) {
     ProcessDestr(pr);
     free(pr);
 }
