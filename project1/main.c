@@ -60,16 +60,16 @@ int parseCommand(Command *cmd, char **argList[]) {
     Vector *args = VectorInit(1);
     while(TokenHasTokens(tok)) {
         token = TokenNext(tok);
-        if(!strcmp( token, ">")) {
+        if(!strcmp(token, ">")) {
             if(!TokenHasTokens(tok))
                 return 0;
-            replaceFile( STDOUT_FILENO, TokenNext(tok), O_WRONLY | O_CREAT, RWURGRO );
-        } else if (!strcmp( token, "2>")) {
-            if( !TokenHasTokens(tok) )
+            replaceFile(STDOUT_FILENO, TokenNext(tok), O_WRONLY | O_CREAT, RWURGRO);
+        } else if (!strcmp(token, "2>")) {
+            if(!TokenHasTokens(tok))
                 return 0;
-            replaceFile( STDERR_FILENO, TokenNext(tok), O_WRONLY | O_CREAT, RWURGRO );
+            replaceFile(STDERR_FILENO, TokenNext(tok), O_WRONLY | O_CREAT, RWURGRO);
         } else if (!strcmp( token, "<")) {
-            if( !TokenHasTokens(tok) )
+            if(!TokenHasTokens(tok))
                 return 0;
             replaceFile(STDIN_FILENO, TokenNext(tok), O_RDONLY, RWURGRO);
         } else {
@@ -238,6 +238,30 @@ void parseLine (Shell *sh) {
 	TokenDelete(tok);
 }
 
+void sigintHandler(int signo) {
+	prompt(shell);
+	if (!shell->active) {
+		return;
+	}
+	kill(shell->active->pid,SIGINT);
+}
+
+void sigtstpHandler(int signo) {
+    prompt(shell);
+    if(!shell->active) {
+        return;
+    }
+    kill( shell->active->pid, SIGTSTP );
+}
+
+void sigchldHandler(int signo) {
+	prompt(shell);
+	if (!shell->active) {
+		return;
+	}
+	kill(shell->active->pid,SIGCHLD);
+}
+
 void waitActive(Shell *sh) {
 	int wstatus;
 	int wpid;
@@ -267,6 +291,10 @@ int main( int argc, char *argv[] ) {
 
 	shell = sh;
 	pid = getpid();
+
+	signal(SIGTSTP, sigtstpHandler);
+	signal(SIGINT, sigintHandler);
+	signal(SIGCHLD, sigchldHandler);
 
 	while(1) {
 		prompt(sh);
