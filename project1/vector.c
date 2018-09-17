@@ -121,8 +121,8 @@ void VectorRemoveAt(Vector* this, int index ) {
 }
 
 void VectorRemove(Vector* this, void * thing) {
-    int loc = Vector_find(this, thing);
-    Vector_removeAt(this, loc);
+    int loc = VectorFind(this, thing);
+    VectorRemoveAt(this, loc);
 }
 
 const void * const * VectorToArray(Vector* this) {
