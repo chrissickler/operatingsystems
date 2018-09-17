@@ -1,6 +1,9 @@
 /* Christopher Sickler */
 /* cbs2468 */
 /* imports go here */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void prompt() {
 
