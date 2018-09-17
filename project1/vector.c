@@ -6,7 +6,7 @@ struct vectorStr {
     int size;
     void** arr;
     void (*del)(void *);
-}
+};
 
 Vector* VectorInit(int length) {
     Vector* vec = malloc(sizeof(Vector));

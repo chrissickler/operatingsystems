@@ -7,7 +7,7 @@ struct tokenStr {
     int pos;
     int length;
     char **elements;
-}
+};
 
 Token * tokenInit(const char *str, const char *del) {
     Token *token = malloc(sizeof(Token));
