@@ -54,7 +54,7 @@ void ProcessDestr(Process *pr) {
     free(pr->command);
 }
 
-Process * ProcessInit(const char *line, pid_t, State state) {
+Process * ProcessInit(const char *line, pid_t pid, State state) {
     Process * out = malloc(sizeof(Process));
     ProcessConst(out,line,pid,state);
     return out;
