@@ -2,10 +2,23 @@
 /* cbs2468 */
 /* imports go here */
 
+void prompt() {
+
+}
+
+void readLine() {
+
+}
+
+void parseLine () {
+
+}
+
 int main() {
-	printf("Welcome to YASH xD/n");
+	// printf("Welcome to YASH xD/n");
 	while(1) {
-		printf("$ ");
-		//detect input here and parse it??
+		prompt();
+		readLine();
+		parseLine();
 	}
 }
