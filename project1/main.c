@@ -270,7 +270,7 @@ void waitActive(Shell *sh) {
         wpid = waitpid( sh->active->pid, &wstatus, WUNTRACED | WCONTINUED );
 		if(WIFEXITED(wstatus)) {
             dprintf("%d exited\n", wpid);
-            remJob( sh, sh->active );
+            remProcess( sh, sh->active );
             sh->active = NULL;
         }
         else if (WIFSTOPPED(wstatus)) {

@@ -54,6 +54,12 @@ void ProcessDestr(Process *pr) {
     free(pr->command);
 }
 
+Process * ProcessInit(const char *line, pid_t, State state) {
+    Process * out = malloc(sizeof(Process));
+    ProcessConst(out,line,pid,state);
+    return out;
+}
+
 void ProcDelete(Process *pr) {
     ProcessDestr(pr);
     free(pr);
@@ -71,5 +77,6 @@ void CommandConst(Command *cmd, const char *line) {
 }
 
 void CommandDestr(Command *cmd) {
-
+    TokenDelete( cmd->tok );
+    cmd->inPipe = cmd->outPipe = NULL;
 }
