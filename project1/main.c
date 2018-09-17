@@ -217,7 +217,7 @@ void parseLine (Shell *sh) {
 			sh->active = child;
 			waitpid(child->pid);
 		} else if (state == bg) {
-			printf(bg %d\n,child->pid);
+			printf("bg %d\n",child->pid);
 		}
 		CommandDestr(&cmd);
 		TokenDelete(cmdtok);
