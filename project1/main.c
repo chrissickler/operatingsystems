@@ -23,6 +23,7 @@ void prompt(Shell *sh) {
 }
 
 void readLine(Shell *sh) {
+	printf("\nreadLine\n");
 	size_t pos = 0;
 	char* buf = sh->line;
 	char c;
@@ -204,6 +205,7 @@ int checkJobs( Shell * sh ) {
 }
 
 void parseLine (Shell *sh) {
+	printf("parseLine\n");
 	if (checkJobs(sh)) {
 		return;
 	}
@@ -268,6 +270,7 @@ void sigchldHandler(int signo) {
 }
 
 void waitActive(Shell *sh) {
+	printf("waitActive\n");
 	int wstatus;
 	int wpid;
 	if (sh->active) {
