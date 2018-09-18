@@ -206,10 +206,11 @@ int checkJobs( Shell * sh ) {
 }
 
 void parseLine (Shell *sh) {
-	// printf("parseLine\n");
+	printf("parseLine\n");
 	if (checkJobs(sh)) {
 		return;
 	}
+	printf("xDD\n");
 	Token *tok = TokenInit(sh->line, "|");
 	int numCmds = TokenNumTokens(tok);
 	State state = strchr(sh->line,'&')? bg: fg;
