@@ -23,7 +23,7 @@ void prompt(Shell *sh) {
 }
 
 void readLine(Shell *sh) {
-	printf("\nreadLine\n");
+	printf("readLine\n");
 	size_t pos = 0;
 	char* buf = sh->line;
 	char c;
@@ -32,6 +32,7 @@ void readLine(Shell *sh) {
 
 		if(c == '\n'){
 			buf[pos] = '\0';
+			return;
 		} else if (c == EOF) {
 			exit(0);
 		} else if (c == "\027") {
