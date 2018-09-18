@@ -29,6 +29,11 @@ void TokenConstr(Token *token, const char *str, const char *del) {
         VectorPush(vec,strdup(tok));
         tok = strtok(NULL,del);
     }
+    token->pos = 0;
+    token->length = VectorLength(vec);
+    token->elements = (char**)VectorToArrayCpy(vec);
+    VectorDelete(vec);
+    free(buf);
 }
 
 void TokenDestr(Token *tok) {
