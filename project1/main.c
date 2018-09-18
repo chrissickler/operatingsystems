@@ -206,14 +206,14 @@ int checkJobs( Shell * sh ) {
 }
 
 void parseLine (Shell *sh) {
-	printf("parseLine\n");
+	// printf("parseLine\n");
 	if (checkJobs(sh)) {
 		return;
 	}
-	printf("xDD\n");
+	// printf("xDD\n");
 	Token *tok = TokenInit(sh->line, "|");
 	int numCmds = TokenNumTokens(tok);
-	printf("%d\n",numCmds);
+	// printf("%d\n",numCmds);
 	State state = strchr(sh->line,'&')? bg: fg;
 	pid_t cpid;
 	if (numCmds == 1) {
@@ -223,7 +223,7 @@ void parseLine (Shell *sh) {
 		cpid = forkexec(&cmd,NULL,0);
 		Process *child = ProcessInit(sh->line,cpid,state);
 		addProcess(sh,child);
-		printf("child should be made\n");
+		// printf("child should be made\n");
 		if (state == fg) {
 			sh->active = child;
 			waitpid(child->pid);
