@@ -23,7 +23,7 @@ void prompt(Shell *sh) {
 }
 
 void readLine(Shell *sh) {
-	printf("readLine\n");
+	// printf("readLine\n");
 	size_t pos = 0;
 	char* buf = sh->line;
 	char c;
@@ -117,7 +117,7 @@ void cleanPipes(Pipe *pipes, int numPipes) {
 }
 
 void exec(Command *cmd, Pipe *pipes, int numPipes) {
-	printf("Hey");
+	printf("Exec\n");
 	char **argList;
     if(!parseCommand( cmd, &argList )) {
         printf("Child failed to setup exec!\n");
@@ -206,7 +206,7 @@ int checkJobs( Shell * sh ) {
 }
 
 void parseLine (Shell *sh) {
-	printf("parseLine\n");
+	// printf("parseLine\n");
 	if (checkJobs(sh)) {
 		return;
 	}
@@ -221,6 +221,7 @@ void parseLine (Shell *sh) {
 		cpid = forkexec(&cmd,NULL,0);
 		Process *child = ProcessInit(sh->line,cpid,state);
 		addProcess(sh,child);
+		printf("child should be made\n");
 		if (state == fg) {
 			sh->active = child;
 			waitpid(child->pid);
@@ -271,7 +272,7 @@ void sigchldHandler(int signo) {
 }
 
 void waitActive(Shell *sh) {
-	printf("waitActive\n");
+	// printf("waitActive\n");
 	int wstatus;
 	int wpid;
 	if (sh->active) {
