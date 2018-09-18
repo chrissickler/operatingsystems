@@ -213,6 +213,7 @@ void parseLine (Shell *sh) {
 	printf("xDD\n");
 	Token *tok = TokenInit(sh->line, "|");
 	int numCmds = TokenNumTokens(tok);
+	printf(numCmds);
 	State state = strchr(sh->line,'&')? bg: fg;
 	pid_t cpid;
 	if (numCmds == 1) {
