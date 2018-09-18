@@ -33,9 +33,12 @@ void readLine(Shell *sh) {
 			buf[pos] = '\0';
 		} else if (c == EOF) {
 			exit(0);
-		} else {
+		} else if (c == "\027") {
+
+        } else {
 			buf[pos] = c;
 		}
+		pos++
 	}
 }
 
