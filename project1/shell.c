@@ -13,6 +13,9 @@ Shell * shellInit(void) {
 }
 
 void ShellConst(Shell *sh) {
+    sh->cwd = malloc( CWD_SIZE * sizeof(char) + 1 );
+    sh->cwd[0] = '\0';
+
     sh->prompt = malloc(PROMPT_SIZE * sizeof(char) + 1);
     sh->prompt[0] = '\0';
 
@@ -25,6 +28,9 @@ void ShellConst(Shell *sh) {
 }
 
 void ShellDestr(Shell *sh) {
+    free(sh->cwd);
+    sh->cwd = NULL;
+
     free(sh->prompt);
     sh->prompt = NULL;
 

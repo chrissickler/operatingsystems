@@ -7,6 +7,7 @@
 #include "token.h"
 #include "vector.h"
 
+#define CWD_SIZE 1000
 #define PROMPT_SIZE 1000
 #define LINE_SIZE 2000
 
@@ -33,6 +34,7 @@ typedef struct {
 } Command;
 
 typedef struct {
+    char *cwd;
     char *prompt;
     char *line;
 

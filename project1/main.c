@@ -115,6 +115,7 @@ void cleanPipes(Pipe *pipes, int numPipes) {
 }
 
 void exec(Command *cmd, Pipe *pipes, int numPipes) {
+	printf("Hey");
 	char **argList;
     if(!parseCommand( cmd, &argList )) {
         printf("Child failed to setup exec!\n");
@@ -148,8 +149,7 @@ pid_t forkexec_grp(Command **cmds, int numCmds) {
 
 		cmds[0]->inPipe = NULL;
         cmds[0]->outPipe = &pipes[0];
-        for( int i = 1; i < numCmds-1; i++ )
-        {
+        for(int i = 1; i < numCmds-1; i++) {
             cmds[i]->inPipe = &pipes[i-1];
             cmds[i]->outPipe = &pipes[i];
         }
@@ -160,7 +160,7 @@ pid_t forkexec_grp(Command **cmds, int numCmds) {
 			forkexec(cmds[i], pipes, numCmds-1);
 		}
 
-		exec( cmds[0], pipes, numCmds-1 );
+		exec(cmds[0], pipes, numCmds-1);
 	}
 	return cpid;
 }
@@ -180,6 +180,8 @@ void pushSusp(Shell * sh, Process * pr) {
 void popSusp(Shell * sh, Process **prHandle) {
 	*prHandle = VectorPop(sh->suspStack);
 }
+
+void waitActive(Shell *sh);
 
 int checkJobs( Shell * sh ) {
     if( !strcmp(sh->line, "fg" ) ) {
@@ -269,6 +271,7 @@ void waitActive(Shell *sh) {
 	int wstatus;
 	int wpid;
 	if (sh->active) {
+		printf("MEOW");
 		dprintf("Waiting on %d \"%s\"\n", sh->active->pid, sh->active->command);
         wpid = waitpid( sh->active->pid, &wstatus, WUNTRACED | WCONTINUED );
 		if(WIFEXITED(wstatus)) {
