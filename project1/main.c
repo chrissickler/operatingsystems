@@ -117,7 +117,7 @@ void cleanPipes(Pipe *pipes, int numPipes) {
 }
 
 void exec(Command *cmd, Pipe *pipes, int numPipes) {
-	printf("Exec\n");
+	// printf("Exec\n");
 	char **argList;
     if(!parseCommand( cmd, &argList )) {
         printf("Child failed to setup exec!\n");
@@ -278,7 +278,7 @@ void waitActive(Shell *sh) {
 	int wstatus;
 	int wpid;
 	if (sh->active) {
-		printf("MEOW");
+		// printf("MEOW");
 		dprintf("Waiting on %d \"%s\"\n", sh->active->pid, sh->active->command);
         wpid = waitpid( sh->active->pid, &wstatus, WUNTRACED | WCONTINUED );
 		if(WIFEXITED(wstatus)) {
