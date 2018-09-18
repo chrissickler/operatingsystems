@@ -266,7 +266,7 @@ void sigtstpHandler(int signo) {
 }
 
 void sigchldHandler(int signo) {
-	prompt(shell);
+	// prompt(shell);
 	if (!shell->active) {
 		return;
 	}
