@@ -38,7 +38,7 @@ void readLine(Shell *sh) {
         } else {
 			buf[pos] = c;
 		}
-		pos++
+		pos++;
 	}
 }
 
