@@ -261,7 +261,7 @@ void parseLine (Shell *sh) {
 }
 
 void sigintHandler(int signo) {
-	printf("int!\n");
+	// printf("int!\n");
 	prompt(shell);
 	if (!shell->active) {
 		return;
@@ -320,11 +320,12 @@ int main( int argc, char *argv[] ) {
 	shell = sh;
 	pid = getpid();
 
-	signal(SIGTSTP, sigtstpHandler);
-	signal(SIGINT, sigintHandler);
-	signal(SIGCHLD, sigchldHandler);
+
 
 	while(1) {
+		signal(SIGTSTP, sigtstpHandler);
+		signal(SIGINT, sigintHandler);
+		signal(SIGCHLD, sigchldHandler);
 		prompt(sh);
 		readLine(sh);
 		parseLine(sh);
