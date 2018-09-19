@@ -269,6 +269,7 @@ void sigintHandler(int signo) {
 	if (!shell->active) {
 		return;
 	}
+	pushSusp(shell,shell->active);
 	shell->active->state = bg;
 	kill(shell->active->pid,SIGINT);
 }
