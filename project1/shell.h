@@ -13,6 +13,7 @@
 
 typedef enum {
     fg,
+    sp,
     bg,
     dn
 } State;

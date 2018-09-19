@@ -200,17 +200,23 @@ int checkJobs( Shell * sh ) {
         return 1;
     }
     else if ( !strcmp(sh->line, "bg") ) {
-        return 1;
+        for (int i =VectorLength(sh->suspStack)-1; i > 0; i--) { //go thru all suspended till we find the process with bg
+			Process *pr = VectorGet(sh->suspStack,i);
+			if(pr->state == bg) {
+				pr->state = fg;
+				sh->active = pr;
+				VectorRemoveAt(sh->suspStack,i);
+			}
+		}
     } else if (!strcmp(sh->line, "jobs")) {
-		printf("3\n");
 
 		for (int i = 0; i < VectorLength(sh->procTable); i++) {
 			Process *pr = VectorGet(sh->procTable, i);
-			if(pr->state == 0) { //fg and sp
+			if(pr->state == 0) { //fg
 				printf("[%d]+  Running      %s\n",i,pr->command);
-			} else if (pr->state == 2) { //dn
+			} else if (pr->state == 3) { //dn
 				printf("[%d]-  Done         %s\n",i,pr->command);
-			} else { //bg
+			} else { //bg and sp
 				printf("[%d]-  Stopped      %s\n",i,pr->command);
 			}
 		}
@@ -242,6 +248,7 @@ void parseLine (Shell *sh) {
 			sh->active = child;
 			waitpid(child->pid);
 		} else if (state == bg) {
+			pushSusp(sh,child);
 			printf("bg %d\n",child->pid);
 		}
 		CommandDestr(&cmd);
@@ -270,7 +277,7 @@ void sigintHandler(int signo) {
 		return;
 	}
 	pushSusp(shell,shell->active);
-	shell->active->state = bg;
+	shell->active->state = sp;
 	kill(shell->active->pid,SIGINT);
 }
 
