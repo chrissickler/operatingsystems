@@ -281,6 +281,7 @@ void sigintHandler(int signo) {
 	shell->active->state = sp;
 	kill(shell->active->pid,SIGINT);
 }
+void sigtstpHandler(int);
 
 void sigtstpHandler(int signo) {
 	// printf("stop!\n");
