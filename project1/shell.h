@@ -13,8 +13,8 @@
 
 typedef enum {
     fg,
-    sp,
-    bg
+    bg,
+    dn
 } State;
 
 typedef struct {

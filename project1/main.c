@@ -206,9 +206,11 @@ int checkJobs( Shell * sh ) {
 
 		for (int i = 0; i < VectorLength(sh->procTable); i++) {
 			Process *pr = VectorGet(sh->procTable, i);
-			if(pr->state == 0) { //fg
+			if(pr->state == 0) { //fg and sp
 				printf("[%d]+  Running      %s\n",i,pr->command);
-			} else { //bg or sp
+			} else if (pr->state == 2) { //dn
+				printf("[%d]-  Done         %s\n",i,pr->command);
+			} else { //bg
 				printf("[%d]-  Stopped      %s\n",i,pr->command);
 			}
 		}
@@ -267,17 +269,17 @@ void sigintHandler(int signo) {
 	if (!shell->active) {
 		return;
 	}
-	shell->active->state = sp;
+	shell->active->state = bg;
 	kill(shell->active->pid,SIGINT);
 }
 
 void sigtstpHandler(int signo) {
-	printf("stop!\n");
+	// printf("stop!\n");
     prompt(shell);
     if(!shell->active) {
         return;
     }
-	shell->active->state = bg;
+	shell->active->state = dn;
     kill( shell->active->pid, SIGTSTP );
 }
 
@@ -299,13 +301,15 @@ void waitActive(Shell *sh) {
         wpid = waitpid( sh->active->pid, &wstatus, WUNTRACED | WCONTINUED );
 		if(WIFEXITED(wstatus)) {
             dprintf("%d exited\n", wpid);
+			int ind = VectorFind(sh->procTable, sh->active);
+			Process *pr = VectorGet(sh->procTable,ind);
+			pr->state = dn;
             // remProcess( sh, sh->active );
-			sh->active->state = bg;
             sh->active = NULL;
         }
         else if (WIFSTOPPED(wstatus)) {
             dprintf("%d stopped\n", wpid);
-            sh->active->state = sp;              // suspend it
+            sh->active->state = bg;              // suspend it
             pushSusp(sh, sh->active);  // push it onto the susp stack
             sh->active = NULL;
         }
