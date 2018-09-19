@@ -236,6 +236,7 @@ void parseLine (Shell *sh) {
 		addProcess(sh,child);
 		// printf("child should be made\n");
 		if (state == fg) {
+			sh->active->state = bg;
 			sh->active = child;
 			waitpid(child->pid);
 		} else if (state == bg) {
@@ -299,6 +300,7 @@ void waitActive(Shell *sh) {
 		if(WIFEXITED(wstatus)) {
             dprintf("%d exited\n", wpid);
             // remProcess( sh, sh->active );
+			sh->active->state = bg;
             sh->active = NULL;
         }
         else if (WIFSTOPPED(wstatus)) {
