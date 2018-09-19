@@ -7,14 +7,16 @@ EXECUTABLE = main
 
 OBJECTS = $(SOURCES:.c=.o)
 
+all: $(EXECUTABLE)
+	@echo "Program built"
+
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(OBJECTS)
 
-all: $(EXECUTABLE) test
-	@echo "Program built"
+
 
 clean:
 	rm *.o $(EXECUTABLE)
