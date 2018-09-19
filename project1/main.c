@@ -186,7 +186,9 @@ void popSusp(Shell * sh, Process **prHandle) {
 void waitActive(Shell *sh);
 
 int checkJobs( Shell * sh ) {
+	printf("%s\n",sh->line);
     if( !strcmp(sh->line, "fg" ) ) {
+		printf("1\n");
         popSusp( sh, &sh->active );
         if( sh->active ) {
             sh->active->state = fg;
@@ -200,9 +202,11 @@ int checkJobs( Shell * sh ) {
         return 1;
     }
     else if ( !strcmp(sh->line, "bg") ) {
+		printf("2\n");
         return 1;
     }
 	else if (strcmp(sh->line, "jobs")) {
+		printf("3\n");
 		for (int i = 0; i < VectorLength(sh->procTable); i++) {
 			Process *pr = VectorGet(sh->procTable, i);
 			if(pr->state == 0) { //fg
