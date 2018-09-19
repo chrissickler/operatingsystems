@@ -208,7 +208,7 @@ int checkJobs( Shell * sh ) {
 			Process *pr = VectorGet(sh->procTable, i);
 			if(pr->state == 0) { //fg
 				printf("[%d]+  Running      %s\n",i,pr->command);
-			} else if (pr->state == 1) { //bg
+			} else { //bg or sp
 				printf("[%d]-  Stopped      %s\n",i,pr->command);
 			}
 		}
