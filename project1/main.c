@@ -273,6 +273,7 @@ void parseLine (Shell *sh) {
 void sigintHandler(int signo) {
 	// printf("int!\n");
 	// prompt(shell);
+	printf("\n");
 	if (!shell->active) {
 		return;
 	}
@@ -285,6 +286,7 @@ void sigtstpHandler(int signo) {
 	// printf("stop!\n");
     // prompt(shell);
     if(!shell->active) {
+		printf("IM A FKING NITWIT\n");
         return;
     }
 	shell->active->state = dn;
