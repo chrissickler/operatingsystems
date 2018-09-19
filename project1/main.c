@@ -265,7 +265,7 @@ void parseLine (Shell *sh) {
 
 void sigintHandler(int signo) {
 	// printf("int!\n");
-	prompt(shell);
+	// prompt(shell);
 	if (!shell->active) {
 		return;
 	}
