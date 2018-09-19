@@ -334,17 +334,17 @@ int main( int argc, char *argv[] ) {
 	shell = sh;
 	pid = getpid();
 
-	struct sigaction sa;
-	sa.sa_handler = sigtstpHandler;
-	sa.sa_flags = 0;
-	sigemptyset(&sa.sa_mask);
+	// struct sigaction sa;
+	// sa.sa_handler = sigtstpHandler;
+	// sa.sa_flags = 0;
+	// sigemptyset(&sa.sa_mask);
 
-	if ( sigaction(SIGTSTP, &sa, NULL) == -1 ) {
-        perror("Couldn't set SIGTSTP handler");
-        exit(EXIT_FAILURE);
-    }
-
-	// signal(SIGTSTP, sigtstpHandler);
+	// if ( sigaction(SIGTSTP, &sa, NULL) == -1 ) {
+    //     perror("Couldn't set SIGTSTP handler");
+    //     exit(EXIT_FAILURE);
+    // }
+	if(signal(SIGTSTP,SIG_IGN) == SIG_DFL)
+		signal(SIGTSTP, sigtstpHandler);
 
 	while(1) {
 		// signal(SIGTSTP, sigtstpHandler);
