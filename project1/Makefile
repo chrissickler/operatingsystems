@@ -6,13 +6,14 @@ EXECUTABLE = main
 
 
 OBJECTS = $(SOURCES:.c=.o)
+$(CC) $(CFLAGS) -o $(EXECUTABLE) $(OBJECTS)
+./$(EXECUTABLE)
 
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(OBJECTS)
-	./$(EXECUTABLE)
 
 all: $(EXECUTABLE)
 	@echo "Program built"
