@@ -261,18 +261,22 @@ void parseLine (Shell *sh) {
 }
 
 void sigintHandler(int signo) {
+	printf("int!\n");
 	prompt(shell);
 	if (!shell->active) {
 		return;
 	}
+	shell->active->state = sp;
 	kill(shell->active->pid,SIGINT);
 }
 
 void sigtstpHandler(int signo) {
+	printf("stop!\n");
     prompt(shell);
     if(!shell->active) {
         return;
     }
+	shell->active->state = bg;
     kill( shell->active->pid, SIGTSTP );
 }
 
