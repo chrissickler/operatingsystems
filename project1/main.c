@@ -202,6 +202,16 @@ int checkJobs( Shell * sh ) {
     else if ( !strcmp(sh->line, "bg") ) {
         return 1;
     }
+	else if (strcmp(sh->line, "jobs")) {
+		for (int i = 0; i < VectorLength(sh->procTable); i++) {
+			Process *pr = VectorGet(sh->procTable, i);
+			if(pr->state == 0) { //fg
+				printf("[%d]+  Running      %s",i,pr->command);
+			} else if (pr->state == 2) { //bg
+				printf("[%d]-  Stopped      %s",i,pr->command);
+			}
+		}
+	}
     return 0;
 }
 
@@ -283,7 +293,7 @@ void waitActive(Shell *sh) {
         wpid = waitpid( sh->active->pid, &wstatus, WUNTRACED | WCONTINUED );
 		if(WIFEXITED(wstatus)) {
             dprintf("%d exited\n", wpid);
-            remProcess( sh, sh->active );
+            // remProcess( sh, sh->active );
             sh->active = NULL;
         }
         else if (WIFSTOPPED(wstatus)) {

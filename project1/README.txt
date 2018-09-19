@@ -1,12 +1,5 @@
 TODO:
 
-string parsing
+add in the jobs, fg, bg, and jobs part
 
-file direction
-
-piping
-
-signals
-
-job control
 

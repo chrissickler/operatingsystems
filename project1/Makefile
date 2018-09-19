@@ -7,7 +7,7 @@ EXECUTABLE = main
 
 OBJECTS = $(SOURCES:.c=.o)
 
-all: $(EXECUTABLE)
+all: $(EXECUTABLE) test
 	@echo "Program built"
 
 .c.o:
