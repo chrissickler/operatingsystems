@@ -12,7 +12,7 @@ OBJECTS = $(SOURCES:.c=.o)
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(OBJECTS)
-
+	./$(EXECUTABLE)
 
 all: $(EXECUTABLE)
 	@echo "Program built"
