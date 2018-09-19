@@ -6,6 +6,7 @@ EXECUTABLE = main
 
 
 OBJECTS = $(SOURCES:.c=.o)
+
 $(CC) $(CFLAGS) -o $(EXECUTABLE) $(OBJECTS)
 ./$(EXECUTABLE)
 
