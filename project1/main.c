@@ -283,7 +283,7 @@ void sigintHandler(int signo) {
 
 void sigtstpHandler(int signo) {
 	// printf("stop!\n");
-    prompt(shell);
+    // prompt(shell);
     if(!shell->active) {
         return;
     }
@@ -344,10 +344,10 @@ int main( int argc, char *argv[] ) {
         exit(EXIT_FAILURE);
     }
 
-	signal(SIGTSTP, sigtstpHandler);
+	// signal(SIGTSTP, sigtstpHandler);
 
 	while(1) {
-		signal(SIGTSTP, sigtstpHandler);
+		// signal(SIGTSTP, sigtstpHandler);
 		signal(SIGINT, sigintHandler);
 		signal(SIGCHLD, sigchldHandler);
 		prompt(sh);
